@@ -1,7 +1,7 @@
 # BetterCustomCSS
 This is a plugin for BetterDiscord.
 ## What does it do?
-This plugin is for BD Theme developers. It let's you edit CSS live with your favorite text editor. Like Custom CSS but better.
+This plugin is for BD Theme developers. It lets you edit CSS live with your favorite text editor. Like Custom CSS but better.
 ## How to use it?
 1. Install the plugin.
 2. Create a CSS file that you want to use.
