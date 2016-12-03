@@ -10,7 +10,7 @@ BetterCustomCSS.prototype.getName = function () {
 	return "BetterCustomCSS";
 };
 BetterCustomCSS.prototype.getDescription = function () {
-	return "Let's you edit CSS live with your favorite text editor. Like Custom CSS but better.";
+	return "Lets you edit CSS live with your favorite text editor. Like Custom CSS but better.";
 };
 BetterCustomCSS.prototype.getVersion = function () {
 	return "0.1.0";
@@ -139,3 +139,5 @@ BetterCustomCSS.prototype.getSettingsPanel = function () {
 
 	return html;
 };
+
+
