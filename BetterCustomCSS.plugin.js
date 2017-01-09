@@ -80,7 +80,7 @@ BetterCustomCSS.prototype.saveSettings = function (button) {
 
 		settings.direcotry = dir;
 		
-		localStorage.BetterCustomCSS = JSON.stringify(settings);
+		bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
 
 		plugin.stop();
 		plugin.start();
@@ -104,7 +104,7 @@ BetterCustomCSS.prototype.defaultSettings = function () {
 
 BetterCustomCSS.prototype.resetSettings = function (button) {
 	var settings = this.defaultSettings();
-	localStorage.BetterCustomCSS = JSON.stringify(settings);
+	bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
 	this.stop();
 	this.start();
 	button.innerHTML = "Settings resetted!";
@@ -112,22 +112,29 @@ BetterCustomCSS.prototype.resetSettings = function (button) {
 };
 
 BetterCustomCSS.prototype.loadSettings = function() {
-	var settings = (localStorage.BetterCustomCSS) ? JSON.parse(localStorage.BetterCustomCSS) : {version:"0"};
+	// Loads settings from localstorage
+	var settings = (bdPluginStorage.get(this.getName(), 'config')) ? JSON.parse(bdPluginStorage.get(this.getName(), 'config')) : {version:"0"};
 	if(settings.version != this.settingsVersion){
-		console.log('[BetterCustomCSS] Settings were outdated/invalid/nonexistent. Using default settings.');
+		console.log('['+this.getName()+'] Settings were outdated/invalid/nonexistent. Using default settings.');
 		settings = this.defaultSettings();
-		localStorage.BetterCustomCSS = JSON.stringify(settings);
+		bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
 	}
 	return settings;
 };
+BetterCustomCSS.prototype.import = function (string) {
+	bdPluginStorage.set(this.getName(), 'config', string);
+	this.stop();
+	this.start();
+}
+
 BetterCustomCSS.prototype.getSettingsPanel = function () {
 	var settings = this.loadSettings();
 	var html = "<h3>Settings Panel</h3><br>";
 	html += "BetterCustomCSS css file directory<br>";
 	html +=	"<input id='qs_directory' type='text' value=" + (settings.direcotry) + " style='width:100% !important;'> <br><br>";
 
-	html +="<br><button onclick=BdApi.getPlugin('BetterCustomCSS').saveSettings(this)>Save and apply</button>";
-	html +="<button onclick=BdApi.getPlugin('BetterCustomCSS').resetSettings(this)>Reset settings</button> <br><br>";
+	html +="<br><button onclick=BdApi.getPlugin('"+this.getName()+"').saveSettings(this)>Save and apply</button>";
+	html +="<button onclick=BdApi.getPlugin('"+this.getName()+"').resetSettings(this)>Reset settings</button> <br><br>";
 
 	html += "<p style='color:red' id='qs_err'></p>";
 
