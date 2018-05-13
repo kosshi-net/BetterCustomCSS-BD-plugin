@@ -11,4 +11,4 @@ This plugin is for BD Theme developers. It lets you edit CSS live with your favo
 6. You can now open the file in your favorite text editor, edit it, and see the results instantly after saving the file.
 
 
-![Exaple gif](https://kosshi.fi/images/bdplugin2.gif)
+![Exaple gif](https://kosshi.net/images/bdplugin2.gif)
