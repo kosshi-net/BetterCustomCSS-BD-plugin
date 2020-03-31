@@ -80,7 +80,7 @@ BetterCustomCSS.prototype.saveSettings = function (button) {
 
 		settings.direcotry = dir;
 		
-		bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
+		BdApi.setData(this.getName(), 'config', JSON.stringify(settings));
 
 		plugin.stop();
 		plugin.start();
@@ -104,7 +104,7 @@ BetterCustomCSS.prototype.defaultSettings = function () {
 
 BetterCustomCSS.prototype.resetSettings = function (button) {
 	var settings = this.defaultSettings();
-	bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
+	BdApi.setData(this.getName(), 'config', JSON.stringify(settings));
 	this.stop();
 	this.start();
 	button.innerHTML = "Settings resetted!";
@@ -113,16 +113,16 @@ BetterCustomCSS.prototype.resetSettings = function (button) {
 
 BetterCustomCSS.prototype.loadSettings = function() {
 	// Loads settings from localstorage
-	var settings = (bdPluginStorage.get(this.getName(), 'config')) ? JSON.parse(bdPluginStorage.get(this.getName(), 'config')) : {version:"0"};
+	var settings = (BdApi.getData(this.getName(), 'config')) ? JSON.parse(BdApi.getData(this.getName(), 'config')) : {version:"0"};
 	if(settings.version != this.settingsVersion){
 		console.log('['+this.getName()+'] Settings were outdated/invalid/nonexistent. Using default settings.');
 		settings = this.defaultSettings();
-		bdPluginStorage.set(this.getName(), 'config', JSON.stringify(settings));
+		BdApi.setData(this.getName(), 'config', JSON.stringify(settings));
 	}
 	return settings;
 };
 BetterCustomCSS.prototype.import = function (string) {
-	bdPluginStorage.set(this.getName(), 'config', string);
+	BdApi.setData(this.getName(), 'config', string);
 	this.stop();
 	this.start();
 }
